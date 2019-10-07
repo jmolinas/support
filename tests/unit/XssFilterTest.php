@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-use Burgerprints\Support\Http\Middleware\XSSProtection;
+use GP\Support\Http\Middleware\XSSProtection;
 
 class XssFilterTest extends TestCase
 {
