@@ -1,9 +1,9 @@
 <?php
 
-namespace GP\Support\Http;
+namespace Gp\Support\Http;
 
 use Illuminate\Support\Collection;
-use GP\Support\Transformers\TransformerInterface;
+use Gp\Support\Transformers\TransformerInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 /**

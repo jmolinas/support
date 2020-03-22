@@ -1,5 +1,5 @@
 <?php
-namespace GP\Support\Helpers;
+namespace Gp\Support\Helpers;
 
 class StringHelper
 {

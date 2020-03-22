@@ -1,7 +1,8 @@
 <?php
 
-namespace GP\Support\Http;
+namespace Gp\Support\Http;
 
+use Gp\Support\Http\Exceptions\InvalidUrlParameterException;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -11,10 +12,38 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Illuminate\Http\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 trait ErrorResponse
 {
     use ApiResponse;
+
+    /**
+     * Response Builder
+     *
+     * @param Request $request
+     * @param Exception $exception
+     *
+     * @return array
+     */
+    protected function responseBuilder(Request $request, HttpExceptionInterface $exception)
+    {
+        $response = [];
+        $response['status'] = $code = $exception->getStatusCode();
+        $response['title'] = Response::$statusTexts[$code];
+        $response['description'] = $exception->getMessage() ? $exception->getMessage() : Response::$statusTexts[$code];
+        $response['links']['self'] = $request->url();
+        if ($throwable = $exception->getPrevious()) {
+            if (method_exists($throwable, 'errors')) {
+                $errors = $throwable->errors();
+                $response['errors'] = is_array($errors) ? $errors : [$errors];
+            }
+        }
+
+        return $response;
+    }
 
     /**
      * Response Handler
@@ -23,48 +52,42 @@ trait ErrorResponse
      *
      * @return @inheritDoc
      */
-    public function errorResponse(Exception $exception)
+    public function errorResponse(Request $request, Exception $exception)
     {
-        $response = [];
-        $errors = null;
         switch (true) {
-            case($exception instanceof HttpException):
+            case ($exception instanceof HttpException):
+                $httpException = $exception;
                 break;
             case ($exception instanceof ModelNotFoundException):
-                $exception = new NotFoundHttpException();
+                $httpException = new NotFoundHttpException();
                 break;
             case ($exception instanceof AuthorizationException):
-                $exception = new AccessDeniedHttpException($exception->getMessage());
+                $httpException = new AccessDeniedHttpException($exception->getMessage());
                 break;
-            case ($exception instanceof \Illuminate\Validation\ValidationException && $exception->getResponse()):
-                $errors = $exception->errors();
-                $exception = new UnprocessableEntityHttpException();
+            case ($exception instanceof \Illuminate\Validation\ValidationException):
+                $httpException = new UnprocessableEntityHttpException($exception->getMessage(), $exception);
                 break;
             case ($exception instanceof \InvalidArgumentException):
             case ($exception instanceof \RuntimeException):
             case ($exception instanceof QueryException):
-                $exception = new UnprocessableEntityHttpException($exception->getMessage());
+                $httpException = new UnprocessableEntityHttpException($exception->getMessage());
+                break;
+
+            case ($exception instanceof InvalidUrlParameterException):
+                $httpException = new BadRequestHttpException($exception->getMessage());
                 break;
 
             default:
-                // Add the exception class name, message and stack trace to response
-                if (!env('APP_DEBUG')) {
-                    $exception = new HttpException(500, 'Internal Server Error');
-                    break;
-                }
-                $response['exception'] = get_class($exception);
-                $exception = new HttpException(500, $exception->getMessage(), $exception);
-                 // Reflection might be better here
+                $httpException = !env('APP_DEBUG') ?
+                    new HttpException(500, 'Internal Server Error') :
+                    new HttpException(500, $exception->getMessage());
                 break;
         }
 
-        $response['status'] = $code = $exception->getStatusCode();
-        $response['description'] = $exception->getMessage() ? $exception->getMessage() : Response::$statusTexts[$code];
-
-        if ($errors) {
-            $response['errors'] = is_array($errors) ? $errors : [$errors];
-        }
-
-        return $this->buildResponse($response, $code, $exception->getHeaders());
+        return $this->buildResponse(
+            $this->responseBuilder($request, $httpException),
+            $httpException->getStatusCode(),
+            $httpException->getHeaders()
+        );
     }
 }

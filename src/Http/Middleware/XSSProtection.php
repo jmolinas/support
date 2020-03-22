@@ -1,6 +1,6 @@
 <?php
 
-namespace GP\Support\Http\Middleware;
+namespace Gp\Support\Http\Middleware;
 
 use Illuminate\Http\Request;
 

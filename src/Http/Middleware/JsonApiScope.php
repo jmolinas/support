@@ -1,62 +1,81 @@
 <?php
 
-namespace GP\Support\Http\Middleware;
+namespace Gp\Support\Http\Middleware;
 
+use Gp\Support\Http\Exceptions\InvalidUrlParameterException;
 use Closure;
 
-use GP\Support\Models\Traits\Sortable;
-use GP\Support\Models\Traits\Filterable;
-use GP\Support\Models\Traits\Page;
-use GP\Support\Models\Traits\Searchable;
+use Gp\Support\Models\Traits\Sortable;
+use Gp\Support\Models\Traits\Filterable;
+use Gp\Support\Models\Traits\Row;
+use Gp\Support\Models\Traits\Searchable;
+use Illuminate\Http\Request;
 
 class JsonApiScope
 {
-    use Sortable, Filterable, Searchable, Page;
-    
+    use Sortable, Filterable, Searchable, Row;
+
     /**
      * Handle incoming request
      *
      * @param \Illuminate\Http\Request $request
      * @param Closure $next
-     * 
+     *
      * @return mixed
      */
     public function handle($request, Closure $next, $class)
     {
         $class::addGlobalScope(
-            'api', 
+            'api',
             function ($builder) use ($request) {
-                $filter = $request->input('filter', []);
-                $page = $request->input('page', []);
-                $search = $request->input('search', []);
+                $filter = $this->validateParamArray($request, 'filter');
+                $row =  $this->validateParamArray($request, 'page');
+                $search =  $this->validateParamArray($request, 'search');
                 $sort = $request->input('sort', null);
                 $builder->when(
-                    ! empty($filter), 
+                    !empty($filter),
                     function ($query) use ($filter) {
                         $this->filter($filter, $query);
                     }
                 )
-                ->when(
-                    ! empty($page), 
-                    function ($query) use ($page) {
-                        $this->page($page, $query);
-                    }
-                )
-                ->when(
-                    ! empty($search), 
-                    function ($query) use ($search) {
-                        $this->search($search, $query);
-                    }
-                )
-                ->when(
-                    ! empty($sort),
-                    function ($query) use ($sort) {
-                        return $this->order($query, $sort);
-                    }
-                );
+                    ->when(
+                        !empty($row),
+                        function ($query) use ($row) {
+                            $this->page($row, $query);
+                        }
+                    )
+                    ->when(
+                        !empty($search),
+                        function ($query) use ($search) {
+                            $this->search($search, $query);
+                        }
+                    )
+                    ->when(
+                        !empty($sort),
+                        function ($query) use ($sort) {
+                            return $this->order($query, $sort);
+                        }
+                    );
             }
         );
 
         return $next($request);
+    }
+
+    /**
+     * Validate Parameter Must be Array
+     *
+     * @param Request $request
+     * @param string $param
+     *
+     * @return array|InvalidUrlParameterException
+     */
+    protected function validateParamArray(Request $request, string $param): array
+    {
+        $value = $request->input($param, []);
+        if (is_array($value)) {
+            return $value;
+        }
+        throw new InvalidUrlParameterException("Invalid Parameter: {$param} must be array");
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace GP\Support\Transformers;
+namespace Gp\Support\Transformers;
 
 use Illuminate\Database\Eloquent\Model;
 

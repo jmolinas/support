@@ -1,6 +1,6 @@
 <?php
 
-namespace GP\Support\Models\Traits;
+namespace Gp\Support\Models\Traits;
 
 use Webpatser\Uuid\Uuid;
 

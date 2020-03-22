@@ -1,8 +1,10 @@
 <?php
 
-namespace GP\Support\Models\Traits;
+namespace Gp\Support\Models\Traits;
 
+use Gp\Support\Http\Exceptions\InvalidUrlParameterException;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Schema;
 
 trait Sortable
 {
@@ -15,14 +17,13 @@ trait Sortable
      * Build Columns
      *
      * @param Builder $builder
-     * 
+     *
      * @return array
      */
     protected function build(Builder $builder)
     {
         $model = $builder->getModel();
-        $columns = empty($column = $builder->getQuery()->columns) ?
-            Schema::getColumnListing($model->getTable()) : $column;
+        $columns = Schema::getColumnListing($model->getTable());
         $rules = [];
 
         foreach ($this->rule as $value) {
@@ -36,10 +37,10 @@ trait Sortable
 
     /**
      * Validate Sort
-     * 
+     *
      * @param array $rule
      * @param mixed $sort
-     * 
+     *
      * @return array
      */
     protected function sortValidate($sort, array $rule)
@@ -48,7 +49,7 @@ trait Sortable
         $columns = [];
         foreach ($sort as $value) {
             if (array_key_exists($value, $rule) === false) {
-                continue;
+                throw new InvalidUrlParameterException('Invalid Parameter: not valid sort value');
             }
             $columns[$value] = $rule[$value];
         }
@@ -59,16 +60,18 @@ trait Sortable
      * Apply Order By
      *
      * @param Builder $builder
-     * 
+     *
      * @return Builder
      */
     public function order(Builder $builder, $sort)
     {
+        $model = $builder->getModel();
+        $table = $model->getTable();
         $columns = $this->build($builder);
         $rules = $this->sortValidate($sort, $columns);
         foreach ($rules as $key => $value) {
             $index = str_replace('-', '', $key);
-            $builder = $builder->orderBy($index, $value);
+            $builder = $builder->orderBy("{$table}.{$index}", $value);
         }
         return $builder;
     }

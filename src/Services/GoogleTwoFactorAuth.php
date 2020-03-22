@@ -1,8 +1,8 @@
 <?php
 
-namespace GP\Support\Services;
+namespace Gp\Support\Services;
 
-use GP\Support\Models\GaAuth;
+use Gp\Support\Models\GaAuth;
 use PHPGangsta_GoogleAuthenticator;
 
 class GoogleTwoFactorAuth

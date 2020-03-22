@@ -1,7 +1,8 @@
 <?php
 
-namespace GP\Support\Models\Traits;
+namespace Gp\Support\Models\Traits;
 
+use Gp\Support\Http\Exceptions\InvalidUrlParameterException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Schema;
 
@@ -13,7 +14,8 @@ trait Filterable
         'greater_than' => '>',
         'greater_equal' => '>=',
         'less_than' => '<',
-        'less_equal' => '<='
+        'less_equal' => '<=',
+        'like' => 'like'
     ];
 
     /**
@@ -22,31 +24,32 @@ trait Filterable
      * @param array $filter
      * @param Builder $builder
      * @param array $filterable
-     * 
+     *
      * @return Builder
      */
     public function filter(array $filter, Builder $builder)
     {
         $model = $builder->getModel();
-        $filterable = empty($column = $builder->getQuery()->columns) ?
-            Schema::getColumnListing($model->getTable()) : $column;
+        $table = $model->getTable();
+        $filterable = Schema::getColumnListing($model->getTable());
 
         foreach ($filter as $key => $value) {
+            $index = "{$table}.{$key}";
             if (!in_array($key, $filterable)) {
-                continue;
+                throw new InvalidUrlParameterException("Invalid Parameter: filter not supported");
             }
 
             if (is_array($value)) {
-                $builder = $this->hasOperator($key, $value, $builder);
+                $builder = $this->hasOperator($index, $value, $builder);
                 continue;
             }
             $items = explode(',', $value);
             $items = array_map('trim', $items);
             if (count($items) > 1) {
-                $builder = $builder->whereIn($key, $items);
+                $builder = $builder->whereIn($index, $items);
                 continue;
             }
-            $builder = $builder->where($key, $value);
+            $builder = $builder->where($index, $value);
         }
         return $builder;
     }
@@ -57,13 +60,17 @@ trait Filterable
      * @param [type] $key
      * @param array $value
      * @param Builder $builder
-     * 
+     *
      * @return null|Builder
      */
     protected function hasOperator($key, array $value, Builder $builder)
     {
         foreach ($value as $index => $item) {
-            if (!is_array($item) && array_key_exists($index, $this->allowedOperators)) {
+            if (!array_key_exists($index, $this->allowedOperators)) {
+                throw new InvalidUrlParameterException('Invalid parameter: filter operator');
+            }
+            if (!is_array($item)) {
+                $item = $index === 'like' ? "%{$item}%" : $item;
                 $builder = $builder->where($key, $this->allowedOperators[$index], $item);
             }
             continue;
