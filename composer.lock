@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "047b00eb7d584f9875f692a497906674",
+    "content-hash": "66e3b241808292a2a1bfa267fdac8a9f",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1374,52 +1374,6 @@
             "time": "2020-03-01T11:11:58+00:00"
         },
         {
-            "name": "nikic/fast-route",
-            "version": "v1.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nikic/FastRoute.git",
-                "reference": "181d480e08d9476e61381e04a71b34dc0432e812"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nikic/FastRoute/zipball/181d480e08d9476e61381e04a71b34dc0432e812",
-                "reference": "181d480e08d9476e61381e04a71b34dc0432e812",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.8.35|~5.7"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "FastRoute\\": "src/"
-                },
-                "files": [
-                    "src/functions.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Nikita Popov",
-                    "email": "nikic@php.net"
-                }
-            ],
-            "description": "Fast request router for PHP",
-            "keywords": [
-                "router",
-                "routing"
-            ],
-            "time": "2018-02-13T20:26:39+00:00"
-        },
-        {
             "name": "opis/closure",
             "version": "3.5.1",
             "source": {
@@ -1567,61 +1521,6 @@
                 "totp"
             ],
             "time": "2019-03-20T00:55:58+00:00"
-        },
-        {
-            "name": "phpoption/phpoption",
-            "version": "1.7.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/schmittjoh/php-option.git",
-                "reference": "4acfd6a4b33a509d8c88f50e5222f734b6aeebae"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/php-option/zipball/4acfd6a4b33a509d8c88f50e5222f734b6aeebae",
-                "reference": "4acfd6a4b33a509d8c88f50e5222f734b6aeebae",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.5.9 || ^7.0 || ^8.0"
-            },
-            "require-dev": {
-                "bamarni/composer-bin-plugin": "^1.3",
-                "phpunit/phpunit": "^4.8.35 || ^5.0 || ^6.0 || ^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.7-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PhpOption\\": "src/PhpOption/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Johannes M. Schmitt",
-                    "email": "schmittjoh@gmail.com"
-                },
-                {
-                    "name": "Graham Campbell",
-                    "email": "graham@alt-three.com"
-                }
-            ],
-            "description": "Option Type for PHP",
-            "keywords": [
-                "language",
-                "option",
-                "php",
-                "type"
-            ],
-            "time": "2020-03-21T18:07:53+00:00"
         },
         {
             "name": "psr/container",
@@ -3414,32 +3313,31 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v4.4.5",
+            "version": "v5.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "2572839911702b0405479410ea7a1334bfab0b96"
+                "reference": "3a37aeb1132d1035536d3d6aa9cb06c2ff9355e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/2572839911702b0405479410ea7a1334bfab0b96",
-                "reference": "2572839911702b0405479410ea7a1334bfab0b96",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/3a37aeb1132d1035536d3d6aa9cb06c2ff9355e9",
+                "reference": "3a37aeb1132d1035536d3d6aa9cb06c2ff9355e9",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1.3",
-                "symfony/polyfill-mbstring": "~1.0",
-                "symfony/polyfill-php72": "~1.5"
+                "php": "^7.2.5",
+                "symfony/polyfill-mbstring": "~1.0"
             },
             "conflict": {
-                "phpunit/phpunit": "<4.8.35|<5.4.3,>=5.0",
-                "symfony/console": "<3.4"
+                "phpunit/phpunit": "<5.4.3",
+                "symfony/console": "<4.4"
             },
             "require-dev": {
                 "ext-iconv": "*",
-                "symfony/console": "^3.4|^4.0|^5.0",
+                "symfony/console": "^4.4|^5.0",
                 "symfony/process": "^4.4|^5.0",
-                "twig/twig": "^1.34|^2.4|^3.0"
+                "twig/twig": "^2.4|^3.0"
             },
             "suggest": {
                 "ext-iconv": "To convert non-UTF-8 strings to UTF-8 (or symfony/polyfill-iconv in case ext-iconv cannot be used).",
@@ -3452,7 +3350,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.4-dev"
+                    "dev-master": "5.0-dev"
                 }
             },
             "autoload": {
@@ -3486,21 +3384,7 @@
                 "debug",
                 "dump"
             ],
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-02-24T13:10:00+00:00"
+            "time": "2020-02-26T22:30:10+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -3630,74 +3514,6 @@
                 }
             ],
             "time": "2020-03-04T11:21:28+00:00"
-        },
-        {
-            "name": "vlucas/phpdotenv",
-            "version": "v4.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "939dfda2d7267ac8fc53ac3d642b5de357554c39"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/939dfda2d7267ac8fc53ac3d642b5de357554c39",
-                "reference": "939dfda2d7267ac8fc53ac3d642b5de357554c39",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.5.9 || ^7.0",
-                "phpoption/phpoption": "^1.7.2",
-                "symfony/polyfill-ctype": "^1.9"
-            },
-            "require-dev": {
-                "bamarni/composer-bin-plugin": "^1.3",
-                "ext-filter": "*",
-                "phpunit/phpunit": "^4.8.35 || ^5.0 || ^6.0 || ^7.0"
-            },
-            "suggest": {
-                "ext-filter": "Required to use the boolean validator."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Dotenv\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Graham Campbell",
-                    "email": "graham@alt-three.com",
-                    "homepage": "https://gjcampbell.co.uk/"
-                },
-                {
-                    "name": "Vance Lucas",
-                    "email": "vance@vancelucas.com",
-                    "homepage": "https://vancelucas.com/"
-                }
-            ],
-            "description": "Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.",
-            "keywords": [
-                "dotenv",
-                "env",
-                "environment"
-            ],
-            "funding": [
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/vlucas/phpdotenv",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-03-12T13:44:15+00:00"
         },
         {
             "name": "voku/portable-ascii",
