@@ -2,7 +2,9 @@
 
 namespace Gp\Support\Models;
 
-class GaAuth extends CoreModel
+use Illuminate\Database\Eloquent\Model;
+
+class GaAuth extends Model
 {
     protected $table = 'ga_auth';
 

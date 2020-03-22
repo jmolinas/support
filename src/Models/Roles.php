@@ -2,7 +2,9 @@
 
 namespace Gp\Support\Models;
 
-class Roles extends CoreModel
+use Illuminate\Database\Eloquent\Model;
+
+class Roles extends Model
 {
     protected $table = 'roles';
 

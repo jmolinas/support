@@ -2,7 +2,9 @@
 
 namespace Gp\Support\Models;
 
-class Party extends CoreModel
+use Illuminate\Database\Eloquent\Model;
+
+class Party extends Model
 {
     /**
      * The table associated with the model.
