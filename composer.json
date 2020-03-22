@@ -14,7 +14,7 @@
         "webpatser/laravel-uuid": "^3.0",
         "tymon/jwt-auth": "~1.0",
         "phpgangsta/googleauthenticator": "dev-master",
-        "vlucas/phpdotenv": "^3.3",
+        "vlucas/phpdotenv": "^4.0",
         "illuminate/events": "^7.0",
         "illuminate/mail": "^7.0",
         "rinvex/countries": "^6.0",
