@@ -1,5 +1,5 @@
 <?php
-namespace Gp\Support\Helpers;
+namespace JMolinas\Support\Helpers;
 
 class StringHelper
 {

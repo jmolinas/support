@@ -1,9 +1,9 @@
 <?php
 
-namespace Gp\Support\Http;
+namespace JMolinas\Support\Http;
 
 use Illuminate\Support\Collection;
-use Gp\Support\Transformers\TransformerInterface;
+use JMolinas\Support\Transformers\TransformerInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 /**

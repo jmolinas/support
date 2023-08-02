@@ -1,8 +1,8 @@
 <?php
 
-namespace Gp\Support\Http;
+namespace JMolinas\Support\Http;
 
-use Gp\Support\Http\Exceptions\InvalidUrlParameterException;
+use JMolinas\Support\Http\Exceptions\InvalidUrlParameterException;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;

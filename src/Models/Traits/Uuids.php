@@ -1,6 +1,6 @@
 <?php
 
-namespace Gp\Support\Models\Traits;
+namespace JMolinas\Support\Models\Traits;
 
 use Webpatser\Uuid\Uuid;
 

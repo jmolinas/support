@@ -1,6 +1,6 @@
 <?php
 
-namespace Gp\Support\Http;
+namespace JMolinas\Support\Http;
 
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;

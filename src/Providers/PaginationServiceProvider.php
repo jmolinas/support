@@ -1,6 +1,6 @@
 <?php
 
-namespace Gp\Support\Providers;
+namespace JMolinas\Support\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-use GP\Support\Http\Middleware\XSSProtection;
+use JMolinas\Support\Http\Middleware\XSSProtection;
 
 class XssFilterTest extends TestCase
 {

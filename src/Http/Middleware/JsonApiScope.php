@@ -1,14 +1,14 @@
 <?php
 
-namespace Gp\Support\Http\Middleware;
+namespace JMolinas\Support\Http\Middleware;
 
-use Gp\Support\Http\Exceptions\InvalidUrlParameterException;
+use JMolinas\Support\Http\Exceptions\InvalidUrlParameterException;
 use Closure;
 
-use Gp\Support\Models\Traits\Sortable;
-use Gp\Support\Models\Traits\Filterable;
-use Gp\Support\Models\Traits\Row;
-use Gp\Support\Models\Traits\Searchable;
+use JMolinas\Support\Models\Traits\Sortable;
+use JMolinas\Support\Models\Traits\Filterable;
+use JMolinas\Support\Models\Traits\Row;
+use JMolinas\Support\Models\Traits\Searchable;
 use Illuminate\Http\Request;
 
 class JsonApiScope

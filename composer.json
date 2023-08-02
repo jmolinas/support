@@ -1,30 +1,29 @@
 {
-    "name": "geniusprime/support",
-    "description": "Support packages for Genius Prime Projects",
+    "name": "jmolinas/support",
+    "description": "Support packages for Lumen projects",
     "type": "library",
     "require": {
-        "php": "^7.2",
-        "illuminate/auth": "^7.0",
-        "illuminate/database": "^7.0",
-        "illuminate/http": "^7.0",
-        "illuminate/pagination": "^7.0",
-        "illuminate/encryption": "^7.0",
-        "webpatser/laravel-uuid": "^3.0",
-        "tymon/jwt-auth": "~1.0",
-        "phpgangsta/googleauthenticator": "dev-master",
-        "illuminate/events": "^7.0",
-        "illuminate/mail": "^7.0",
-        "rinvex/countries": "^6.0",
-        "barryvdh/laravel-cors": "^1.0"
+        "php": "^8.1",
+        "illuminate/auth": "^10.0",
+        "illuminate/database": "^10.0",
+        "illuminate/http": "^10.0",
+        "illuminate/pagination": "^10.0",
+        "illuminate/encryption": "^10.0",
+        "tymon/jwt-auth": "^2.0",
+        "webpatser/laravel-uuid": "^4.0",
+        "illuminate/events": "^10.0",
+        "illuminate/mail": "^10.0",
+        "rinvex/countries": "^9.0",
+        "illuminate/validation": "^10.17"
     },
     "require-dev": {
-        "mockery/mockery": "^1.2",
-        "phpunit/phpunit": "^7.0",
-        "fzaninotto/faker": "^1.8"
+        "mockery/mockery": "^1.4.4",
+        "phpunit/phpunit": "^10.0",
+        "fakerphp/faker": "^1.9.1"
     },
     "autoload": {
         "psr-4": {
-            "GP\\Support\\": "src/"
+            "JMolinas\\Support\\": "src/"
         }
     },
     "autoload-dev": {
@@ -34,7 +33,7 @@
     },
     "authors": [
         {
-            "name": "GP Devs",
+            "name": "Devs",
             "email": "devs@email.com"
         }
     ],

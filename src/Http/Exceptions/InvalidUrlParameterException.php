@@ -1,6 +1,6 @@
 <?php
 
-namespace Gp\Support\Http\Exceptions;
+namespace JMolinas\Support\Http\Exceptions;
 
 /**
  * Define a custom exception class

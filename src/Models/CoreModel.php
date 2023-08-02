@@ -1,6 +1,6 @@
 <?php
 
-namespace Gp\Support\Models;
+namespace JMolinas\Support\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;

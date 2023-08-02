@@ -1,8 +1,8 @@
 <?php
-namespace Gp\Support\Models\Traits;
+namespace JMolinas\Support\Models\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
-use Gp\Support\Http\Exceptions\InvalidUrlParameterException;
+use JMolinas\Support\Http\Exceptions\InvalidUrlParameterException;
 
 trait Row
 {
