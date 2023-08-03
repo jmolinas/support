@@ -17,13 +17,16 @@ trait ApiResponse
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function buildResponse($response = null, int $code = 200, array $header = [])
-    {
-        $apiHeader = !empty($header) ?
-            array_merge(['Content-Type' => 'application/vnd.api+json'], $header) :
-            ['Content-Type' => 'application/vnd.api+json'];
+    public function buildResponse(
+        $response = null,
+        int $code = 200,
+        array $header = []
+    ) {
+        $apiHeader = !empty($header)
+            ? array_merge(['Content-Type' => 'application/vnd.api+json'], $header)
+            : ['Content-Type' => 'application/vnd.api+json'];
 
-        return JsonResponse::create($response, $code, $apiHeader);
+        return new JsonResponse($response, $code, $apiHeader);
     }
 
     /**
@@ -36,7 +39,9 @@ trait ApiResponse
     public function jsonPaginate($collection)
     {
         if (!$collection instanceof LengthAwarePaginator) {
-            throw new \Exception('Collection must be instace of LengthAwarePaginator');
+            throw new \Exception(
+                'Collection must be instace of LengthAwarePaginator'
+            );
         }
         $header = [
             'X-Pagination-Total-Count' => $collection->total(),
@@ -44,7 +49,7 @@ trait ApiResponse
             'X-Pagination-Current-Page' => $collection->currentPage(),
             'X-Pagination-Per-Page' => $collection->perPage(),
             'X-Pagination-Next-Page' => $collection->nextPageUrl(),
-            'X-Pagination-Prev-Page' => $collection->previousPageUrl()
+            'X-Pagination-Prev-Page' => $collection->previousPageUrl(),
         ];
         return $this->buildResponse($collection, Response::HTTP_OK, $header);
     }
@@ -87,7 +92,7 @@ trait ApiResponse
         $response = [
             'success' => true,
             'status' => $status,
-            'message' => Response::$statusTexts[$status]
+            'message' => Response::$statusTexts[$status],
         ];
         if (!empty($data)) {
             $response['data'] = $data;
@@ -108,7 +113,7 @@ trait ApiResponse
         $response = [
             'success' => true,
             'status' => $status,
-            'message' => Response::$statusTexts[$status]
+            'message' => Response::$statusTexts[$status],
         ];
         if (!empty($data)) {
             $response['data'] = $data;
