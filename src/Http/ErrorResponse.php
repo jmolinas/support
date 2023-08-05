@@ -3,7 +3,8 @@
 namespace JMolinas\Support\Http;
 
 use JMolinas\Support\Http\Exceptions\InvalidUrlParameterException;
-use Exception;
+use Throwable;
+use JMolinas\Support\Http\ApiResponse;
 use Illuminate\Auth\Access\AuthorizationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -48,11 +49,11 @@ trait ErrorResponse
     /**
      * Response Handler
      *
-     * @param Exception $exception
+     * @param Throwable $exception
      *
      * @return @inheritDoc
      */
-    public function errorResponse(Request $request, Exception $exception)
+    public function errorResponse(Request $request, Throwable $exception)
     {
         switch (true) {
             case ($exception instanceof HttpException):
