@@ -5,12 +5,19 @@ namespace JMolinas\Support\Http;
 use Illuminate\Support\Collection;
 use JMolinas\Support\Transformers\TransformerInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Request;
 
 /**
  * ModelTransformer
  */
 trait ModelTransformer
 {
+    public function getCollection($model): LengthAwarePaginator|Collection
+    {
+        $pageSize = Request::input('page.size');
+        return $pageSize ? $model->paginate($pageSize) : $model->get();
+    }
+
     /**
      * Transform Model
      *
